@@ -1,5 +1,87 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model OShop.ViewModels.LoginViewModel
 @{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="/fontawesome/font-awesome.min.css">
+        <link rel="stylesheet" href="/style/style.css">
+
+        <script src="/script/jquery-3.2.1.js"></script>
+        <script src="/bootstrap/bootstrap.js"></script>
+        <script src="/bootstrap/bootstrap.bundle.js"></script>
+
+
+    </head>
+    <body>
+        <section class="login-main">
+            <div class="row ml-0 mr-0">
+                <div class="login-form col-lg-4 col-md-5 col-sm-6 col-10 offset-lg-1 offset-md-1 offset-sm-2  offset-1">
+                    <div class="bg-white shadow-sm rounded p-6">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "js-validate", @novalidate="novalidate" }))
+                        {
+                            <div class="mb-4">
+                                <h2 class="h4 bold">Title Name here</h2>
+                            </div>
+                            <!-- Input -->
+                            <div class="js-form-message mb-3">
+                                <label>Enter User Name</label>
+                                <div class="js-focus-state input-group input-group form">
+                                    @*<input type="text" class="form-control form__input" name="username" required="" aria-label="Enter your username">*@
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control form__input", @type = "text" })
+                                </div>
+                            </div>
+                            <!-- End Input -->
+                            <!-- Input -->
+                            <div class="js-form-message mb-3">
+                                <label>Enter password</label>
+                                <div class="js-focus-state input-group input-group form">
+                                    @*<input type="password" class="form-control form__input" name="password" required="" aria-label="Enter your password">*@
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form__input", @type = "password" })
+                                </div>
+                            </div>
+                            <!-- End Input -->
+
+                            <button type="submit" class="btn btn-block btn-save bold" id="login" name="login">Login</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+
+<style>
+    .login-main {
+        height: 100vh;
+        background: linear-gradient(180deg, rgb(0, 204, 153) 0%, rgb(0, 204, 153) 0.01%, rgba(0, 204, 153, 0.3) 100%), url("images/loginBg.jpg");
+        background-size: 100% 100%;
+    }
+
+    .p-6 {
+        padding: 2.5rem !important;
+    }
+
+    .form-control {
+        height: calc(1.7em + 1.5rem + 2px) !important;
+        padding: 0.75rem 1rem !important;
+    }
+
+    .login-form {
+        margin-top: 6rem;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#login').click(function () {
+            $('#formLogin').submit();
+        });
+    });
+</script>
 }

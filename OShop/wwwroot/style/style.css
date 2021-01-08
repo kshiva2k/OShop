@@ -1,0 +1,46 @@
+.bg-color{
+	background-color: #00cc99;
+}
+.btn-save{
+	background-color:#e6e600;
+	color:#ffffff;
+}
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus{
+	color: #ffffff;
+}
+.navbar-light .navbar-brand{
+	color:#ffffff;
+}
+.navbar-light .navbar-nav .show > .nav-link, 
+.navbar-light .navbar-nav .active > .nav-link, 
+.navbar-light .navbar-nav .nav-link.show, 
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link{
+	color:#ffffff !important;
+}
+header{
+	border-bottom:1px solid #ffffff;
+}
+
+table th, table td {
+    border: none !important;
+}
+table tr th{
+	text-align:center;
+}
+.banner{
+	height:50vh;
+	background:linear-gradient(180deg, rgb(0, 204, 153) 0%, rgb(0, 204, 153) 0.01%, rgba(0, 204, 153, 0.3) 100%), url("../images/bannerBg.jpg");
+	background-size:cover;
+	background-position:center;
+	color:#fff;
+	padding:20px;
+
+}
+.main-head, .sub-head{
+	font-weight: 700;
+}
+.sub-head {
+    color: #00070F;
+    font-size: 18px;
+}
