@@ -9,6 +9,16 @@ namespace OShop.ViewModels
         public string Mobileno { get; set; }
         public string Email { get; set; }
         public int Roleid { get; set; }
-        public int? Agencyid { get; set; }
+        public int Agencyid { get; set; }
+
+        public string RoleName { get; set; }
+    }
+
+    public class SelectionItem
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+
+        public bool Selected { get; set; }
     }
 }

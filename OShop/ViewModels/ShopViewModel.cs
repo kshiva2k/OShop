@@ -12,5 +12,8 @@ namespace OShop.ViewModels
         public string Phone { get; set; }
         public string Email { get; set; }
         public decimal? Amount { get; set; }
+        public decimal OverallAmount { get; set; }
+
+        public string Shopcategory { get; set; }
     }
 }
