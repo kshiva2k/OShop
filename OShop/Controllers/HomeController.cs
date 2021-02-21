@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OShop.Repository;
 using OShop.ViewModels;
 namespace OShop.Controllers
@@ -10,9 +7,11 @@ namespace OShop.Controllers
     public class HomeController : Controller
     {
         UserRepository userRepository;
-        public HomeController(UserRepository _userRepository)
+        AgencyRepository agencyRepository;
+        public HomeController(UserRepository _userRepository, AgencyRepository _agencyRepository)
         {
             userRepository = _userRepository;
+            agencyRepository = _agencyRepository;
         }
         public IActionResult Index()
         {
@@ -33,11 +32,20 @@ namespace OShop.Controllers
             {
                 // Valid user
                 HttpContext.Session.SetInt32("UserId", result.Id);
+                HttpContext.Session.SetInt32("RoleId", result.Roleid);
                 HttpContext.Session.SetString("Username", result.Loginname);
-                if (result.Roleid == 1) // Admin role
+                HttpContext.Session.SetInt32("Agencyid", result.Agencyid);
+                if (result.Roleid != 3) // Admin role
                 {
-                    actionName = "ShopList";
-                    controllerName = "Admin";
+                    actionName = "Dashboard";
+                    controllerName = "Home";
+                }
+                else
+                {
+
+                    actionName = "Delivery";
+                    controllerName = "User";
+
                 }
                 return RedirectToAction(actionName, controllerName);
             }
@@ -45,9 +53,28 @@ namespace OShop.Controllers
             {
                 loginViewModel.Password = "";
                 // Invalid user
-                ViewData["Error"] = "Invalid credentials !";
+                ViewBag.Error = "Invalid credentials !";
                 return View(loginViewModel);
             }
         }
+        [Services.SessionCheck]
+        public IActionResult Dashboard()
+        {
+            var data = agencyRepository.GetDashboardData(HttpContext.Session.GetInt32("Agencyid").GetValueOrDefault());
+            return View(data);
+        }
+        [Services.SessionCheck]
+        public IActionResult DeliveryScreen()
+        {
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+           
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

@@ -1,0 +1,156 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Delivery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Delivery</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                        <li class="breadcrumb-item active">Delivery</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    @using (Html.BeginForm("Delivery", "User", FormMethod.Post))
+    {
+        <div class="card card-default">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="form-group">
+                            <label>Shop No</label>
+                            <input type="text" id="shopcode" class="form-control" name="shopcode" placeholder="Enter shop no" />
+                            <span style="display:none" id="shopcode-error" class="error invalid-feedback">Please enter a shop no</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="form-group">
+                            <label>Choose Shop</label>
+                            <select id="shoplist" name="shoplist" class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Choose shop name ..</option>
+                                @foreach (var item in (List<OShop.ViewModels.SelectionItem>)ViewData["ShopMaster"])
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span style="display:none" id="shoplist-error" class="error invalid-feedback">Please enter a shop name</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="form-group">
+                            <label style="visibility: hidden">hidden</label>
+                            <button type="button" class="btn btn-primary" id="getdetail" onclick="return GetShopDetail();" name="getdetail">Get Shop Details</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card card-default" id="shopdetails" style="display:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="form-group">
+                            <label>Shop code: </label>
+                            <label id="code"></label>
+                            <input type="hidden" id="id" name="id" />
+                            <input type="hidden" id="aid" name="aid" />
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                        <div class="form-group">
+                            <label>Shop name: </label>
+                            <label id="shopname"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-sm-2">
+                        <div class="form-group">
+                            <label>No. of quantity: </label>
+                            <input type="number" id="count" name="count" class="form-control" maxlength="2" onkeyup="Onkeyupsbill();" />
+                            <input type="hidden" id="amt" name="amt" />
+                            <span style="display:none" id="count-error" class="error invalid-feedback">Please enter a Quantity</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-sm-2">
+                        <div class="form-group">
+                            <label>Bill amount: </label>
+                            <input type="hidden" id="hiddenoverallbill" name="hiddenoverallbill" />
+                            <label id="billamount">Rs.0</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <div class="form-group">
+                            <label>Paid amount: </label>
+                            <input type="text" class="form-control" id="paidamt" name="paidamt" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-lg-5 col-sm-5">
+                        <div class="form-group">
+                            <h5><label>Overall outstanding bill : Rs.</label> <label id="overallbill"></label></h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <div class="form-group">
+                            <label>Return Quantity: </label>
+                            <input type="number" id="return" class="form-control" name="return" maxlength="8" />
+                            <span style="display:none" id="return-error" class="error invalid-feedback">Please enter a return quantity</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <div class="form-group">
+                            <label>Payment mode: </label>
+                            <select id="paymentmode" name="paymentmode" class="form-control select2bs4" onchange="PaymentMode();">
+                                <option value="" selected>-- Choose payment mode --</option>
+                                <option value="1">Cash</option>
+                                <option value="2">Cheque</option>
+                            </select>
+                        </div>
+                        <span style="display:none" id="paymentmode-error" class="error invalid-feedback">Please enter a payment mode</span>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-sm-2" id="dCheque" style="display:none">
+                        <div class="form-group">
+                            <label>Cheque no: </label>
+                            <input type="number" id="chequeno" class="form-control" name="chequeno" maxlength="8" />
+                            <span style="display:none" id="chequeno-error" class="error invalid-feedback">Please enter a cheque no</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                        <div class="form-group bottom-center">
+
+                            <button type="button" class="btn btn-primary " id="save" onclick="return SaveDelivery();">Save</button>
+                            <button type="button" class="btn btn-danger ">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        @*<div class="card card-default">
+                <div class="card-body">
+                    <div class="row">
+
+
+                    </div>
+
+                </div>
+            </div>*@
+    }
+</div>
+<script src="~/plugins/Delivery.js"></script>

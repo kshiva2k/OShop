@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
+using Microsoft.Extensions.Configuration;
 namespace OShop.Models
 {
     public partial class oshopContext : DbContext
@@ -10,10 +10,7 @@ namespace OShop.Models
         {
         }
 
-        public oshopContext(DbContextOptions<oshopContext> options)
-            : base(options)
-        {
-        }
+        public oshopContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<GAgencymaster> GAgencymaster { get; set; }
         public virtual DbSet<GAgencysubscription> GAgencysubscription { get; set; }
@@ -23,14 +20,15 @@ namespace OShop.Models
         public virtual DbSet<GShopmaster> GShopmaster { get; set; }
         public virtual DbSet<GUsermaster> GUsermaster { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=127.0.0.1;port=3306;user=root;password=Mysql@2020;database=oshop");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                //optionsBuilder.UseMySQL("server=127.0.0.1;port=3306;user=root;password=Mysql@2020;database=oshop");
+//                optionsBuilder.UseMySQL(configuration.GetConnectionString("DefaultConnection"));
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -147,7 +145,11 @@ namespace OShop.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
+                entity.Property(e => e.Quantity)
+                    .HasColumnName("quantity")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Returnquantity).HasColumnName("returnquantity");
 
                 entity.Property(e => e.Shopid).HasColumnName("shopid");
 

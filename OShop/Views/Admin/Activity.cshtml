@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Activity list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- daterange picker -->
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Activity List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Activity List</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title"></h3>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Choose Agency</label>
+                    <select id="agencylist" name="agencylist" class="form-control select2bs4" onchange="onchangeAgency();" style="width: 100%;">
+                    </select>
+                    <span style="display:none" id="agencylist-error" class="error invalid-feedback">Please enter a agency</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card-body" id="activitymaster">
+
+        </div>
+        <div class="card-body" id="activitylist">
+
+        </div>
+    </div>
+</div>
+<script src="~/plugins/Activity.js"></script>
+<script>
+
+</script>

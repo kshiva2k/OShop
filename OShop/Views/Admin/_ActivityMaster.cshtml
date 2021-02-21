@@ -1,0 +1,35 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Shop no</label>
+                <input type="text" id="shopcode" class="form-control" name="shopcode" placeholder="Enter shop no" />
+                <span style="display:none" id="shopcode-error" class="error invalid-feedback">Please enter a shop no</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Shop name</label>
+                <select id="shoplist" name="shoplist" class="form-control select2bs4" style="width: 100%;">
+                    <option value="">Choose shop name ..</option>
+                    @foreach (var item in (List<OShop.ViewModels.SelectionItem>)ViewData["ShopMaster"])
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span style="display:none" id="shoplist-error" class="error invalid-feedback">Please enter a shop name</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group bottom-center">
+                <button type="button" class="btn btn-primary " id="getdetail" onclick="return bindActivities();" name="getdetail">Submit</button>
+            </div>
+        </div>
+    </div>
+

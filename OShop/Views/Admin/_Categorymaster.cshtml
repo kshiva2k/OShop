@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model OShop.ViewModels.ShopCategoryViewModel;
+
+@using (Html.BeginForm("ShopCategoryList", "Admin", FormMethod.Post, new { id = "fCategory" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+
+            <!-- /.form-group -->
+            <div class="form-group">
+                <label>Category Name *</label>
+                @Html.TextBoxFor(m => m.Name, new { id = "Categoryid", @name = "Categoryid", @class = "form-control", @type = "text", @placeholder = "Category Name", @onkeyup = "onkeyups(this.id);" })
+            <span style="display:none" id="Categoryid-error" class="error invalid-feedback">Please enter Category name</span>
+            </div>
+            <div class="form-group bottom-center">
+                
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Agencyid)
+                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+                <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
+
+            </div>
+            <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+       
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <script type="text/javascript">
+
+    function SaveFunction() {
+        var condition = Validateuser();
+
+        if (condition == true) {
+            $("#Agencyid").val($("#agencylist").val());
+            // $('#formShop').submit();
+            //$('#fShop').trigger('submit');
+            return true;
+
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+    function Validateuser() {
+
+        if ($('#agencylist').val() == null || $('#agencylist').val() == '') {
+
+            $("#agencylist").css('border-color', '#dc3545');
+            $("#agencylist-error").show();
+            return false;
+        }
+
+        if ($('#Categoryid').val() == null || $('#Categoryid').val() == '') {
+
+            $("#Categoryid").css('border-color', '#dc3545');
+            $("#Categoryid-error").show();
+            return false;
+        }
+
+        
+        else {
+
+            return true;
+        }
+
+        return true;
+    }
+
+
+
+    </script>
+
+
+}

@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model OShop.ViewModels.UserViewModel;
+
+@using (Html.BeginForm("UserMaster", "Admin", FormMethod.Post, new { id = "fUser" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+
+            <!-- /.form-group -->
+            <div class="form-group">
+                <label>Login Name *</label>
+                @Html.TextBoxFor(m => m.Loginname, new { id = "loginnameid", @name = "loginnameid", @class = "form-control", @type = "text", @placeholder = "LoginName", @onkeyup = "onkeyups(this.id);" })
+                <span style="display:none" id="loginnameid-error" class="error invalid-feedback">Please enter Login name</span>
+            </div>
+            <div class="form-group">
+                <label>Mobile no </label>
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Agencyid)
+                @Html.TextBoxFor(m => m.Mobileno, new { id = "mobileid", @name = "mobileid", @class = "form-control", @type = "text", @placeholder = "Mobile No", @onkeyup = "onkeyups(this.id);" })
+                
+            </div>
+            <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Email, new { id = "emailid", @class = "form-control", @type = "text", @placeholder = "Email" })
+            </div>
+
+            <div class="form-group">
+                <label>Role *</label>
+                <select name="Roleid" class="form-control select2bs4" id="Roleid" style="width: 100%;" onchange="onchanges(this.id);">
+                    <option value="">Choose Role ..</option>
+                    @foreach (var item in (List<OShop.ViewModels.SelectionItem>)ViewData["Role"])
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span style="display:none" id="Roleid-error" class="error invalid-feedback">Please enter Role</span>
+            </div>
+            <!-- /.form-group -->
+        </div>
+
+       
+
+        <div class="col-md-6">
+           
+            <div class="form-group bottom-center">
+                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+                <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
+
+            </div>
+            <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+<script type="text/javascript">
+
+    function SaveFunction() {
+        var condition = Validateuser();
+
+        if (condition == true) {
+            $("#Agencyid").val($("#agencylist").val());
+            // $('#formShop').submit();
+            //$('#fShop').trigger('submit');
+            return true;
+
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+    function Validateuser() {
+
+        if ($('#agencylist').val() == null || $('#agencylist').val() == '') {
+
+            $("#agencylist").css('border-color', '#dc3545');
+            $("#agencylist-error").show();
+            return false;
+        }
+
+        if ($('#loginnameid').val() == null || $('#loginnameid').val() == '') {
+
+            $("#loginnameid").css('border-color', '#dc3545');
+            $("#loginnameid-error").show();
+            return false;
+        }
+
+        else if ($('#Roleid').val() == null || $('#Roleid').val() == '') {
+
+            $("#Roleid").css('border-color', '#dc3545');
+            $("#Roleid-error").show();
+            return false;
+        }
+        else {
+
+            return true;
+        }
+
+        return true;
+    }
+
+
+
+</script>
+
+
+}

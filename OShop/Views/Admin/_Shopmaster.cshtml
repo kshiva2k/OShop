@@ -1,0 +1,151 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model OShop.ViewModels.ShopViewModel;
+@using (Html.BeginForm("ShopMaster", "Admin", FormMethod.Post, new { id = "fShop" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @*<div class="row">*@
+                    @*<div class="col-md-10">*@
+                        <label>Shop Category *</label>
+                        <select name="Shopcategoryid" class="form-control select2bs4" id="Shopcategoryid" style="width: 100%;" onchange="onchanges(this.id);">
+                            <option value="">Choose shop category ..</option>
+                            @foreach (var item in (List<OShop.ViewModels.ShopCategoryViewModel>)ViewData["ShopCategory"])
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span style="display:none" id="Shopcategoryid-error" class="error invalid-feedback">Please enter a shop category</span>
+                    @*</div>*@
+                    @*<div class="col-md-2">
+                        <a placeholder="Add new shop Category" href="#" class="btn btn-success"><i class="fas fa-plus"></i></a>
+                    </div>*@
+                @*</div>*@
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Shop no *</label>
+                    @Html.TextBoxFor(m => m.Code, new { id = "shopcodeid", @name = "shopcode", @class = "form-control", @type = "text", @placeholder = "Shop no", @maxlength = "5", @onkeyup = "onkeyups(this.id);" })
+                    <span style="display:none" id="shopcodeid-error" class="error invalid-feedback">Please enter a shop no</span>
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!-- /.form-group -->
+            <div class="form-group">
+                <label>Shop code</label>
+                @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @type = "text", @placeholder = "Shop code", @maxlength = "5" })
+            </div>
+            <!-- /.form-group -->
+        
+        <!-- /.col -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Shop Name *</label>
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Agencyid)
+                @Html.TextBoxFor(m => m.Name, new { id = "shopnameid", @name = "shopname", @class = "form-control", @type = "text", @placeholder = "Shop name", @maxlength = "100", @onkeyup = "onkeyups(this.id);" })
+                <span style="display:none" id="shopnameid-error" class="error invalid-feedback">Please enter a shop name</span>
+            </div>
+            <div class="form-group">
+                <label>Shop Address</label>
+                @Html.TextAreaFor(m => m.Address, new { id = "shopaddr", @class = "form-control", @type = "text", @placeholder = "Shop Address", @maxlength = "200" })
+            </div>
+            <!-- /.form-group -->
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Mobile</label>
+                @Html.TextBoxFor(m => m.Phone, new { id = "shopno", @class = "form-control", @type = "number", @placeholder = "Mobile", @maxlength = "10" })
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Email, new { id = "shopemail", @class = "form-control", @type = "email", @placeholder = "Email", @maxlength = "20" })
+            </div>
+            <!-- /.form-group -->
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Amount *</label>
+                @Html.TextBoxFor(m => m.Amount, new { id = "amountid", @name = "amount", @class = "form-control", @type = "number", @placeholder = "Amount", @maxlength = "8", @onkeyup = "onkeyups(this.id);" })
+                <span style="display:none" id="amountid-error" class="error invalid-feedback">Please enter a amount</span>
+            </div>
+            <div class="form-group bottom-center">
+                
+                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+                <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
+
+            </div>
+            <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <script type="text/javascript">
+        
+        function SaveFunction() {
+            var condition = Validateshop();
+
+            if (condition == true) {
+                $("#Agencyid").val($("#agencylist").val());
+                // $('#formShop').submit();
+                //$('#fShop').trigger('submit');
+                return true;
+
+            }
+            else {
+                return false;
+            }
+        }
+
+        
+
+        function Validateshop() {
+
+            if ($('#agencylist').val() == null || $('#agencylist').val() == '') {
+
+                $("#agencylist").css('border-color', '#dc3545');
+                $("#agencylist-error").show();
+                return false;
+            }
+
+            if ($('#Shopcategoryid').val() == null || $('#Shopcategoryid').val() == '') {
+
+                $("#Shopcategoryid").css('border-color', '#dc3545');
+                $("#Shopcategoryid-error").show();
+                return false;
+            }
+            else if ($('#shopnameid').val() == null || $('#shopnameid').val() == '') {
+
+                $("#shopnameid").css('border-color', '#dc3545');
+                $("#shopnameid-error").show();
+                return false;
+            }
+            else if ($('#shopcodeid').val() == null || $('#shopcodeid').val() == '') {
+
+                $("#shopcodeid").css('border-color', '#dc3545');
+                $("#shopcodeid-error").show();
+                return false;
+            }
+
+            else if ($('#amountid').val() == null || $('#amountid').val() == '') {
+
+                $("#amountid").css('border-color', '#dc3545');
+                $("#amountid-error").show();
+                return false;
+            }
+            else {
+
+                return true;
+            }
+
+            return true;
+        }
+
+
+
+    </script>
+}

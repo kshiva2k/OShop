@@ -5,6 +5,51 @@
     ViewData["Title"] = "Shop List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    <h2>Shop List</h2>
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Shop Master</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Shop Master</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title"></h3>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Choose Agency</label>
+                    <select id="agencylist" name="agencylist" class="form-control select2bs4" style="width: 100%;" onchange="onchangeAgency();">
+                    </select>
+                    <span style="display:none" id="agencylist-error" class="error invalid-feedback">Please enter a agency</span>
+                </div>
+            </div>
+            <div class="card-tools">
+                @*<button type="button" class="btn btn-tool" ><i class="fas fa-minus" placeholder="Add New Shop"></i></button>*@
+
+                <button placeholder="Add new shop" onclick="clear();" type="button" class="btn btn-block bg-gradient-success" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+
+            </div>
+        </div>
+        <div class="card-body" id="shopmaster">
+            
+        </div>        
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div  id="shoplist">
+                
+            </div>
+        </div>
+    </div>
 </div>
+<script src="~/plugins/shoplist.js"></script>

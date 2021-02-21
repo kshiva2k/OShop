@@ -7,7 +7,12 @@ namespace OShop.Repository
 {
     public interface UserRepository
     {
-        List<UserViewModel> GetUsers();
+        List<UserViewModel> GetUsers(int id);
         UserViewModel ValidateUser(string _loginname, string _password);
+
+
+        List<SelectionItem> GetRoles(int id);
+
+        bool AddUser(UserViewModel viewModel);
     }
 }

@@ -18,6 +18,8 @@ namespace OShop.Models
         public int? Active { get; set; }
         public DateTime? Createddate { get; set; }
         public DateTime? Billclearancedate { get; set; }
+        public int? Returnquantity { get; set; }
+        public decimal? Overallbalance { get; set; }
 
         public virtual GAgencymaster Agency { get; set; }
         public virtual GShopmaster Shop { get; set; }

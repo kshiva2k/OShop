@@ -18,5 +18,10 @@ namespace OShop.Repository
         bool UpdateShopCategory(ShopCategoryViewModel viewModel);
         bool DeleteteShopCategory(int Id);
         ShopCategoryViewModel GetShopCategoryById(int id);
+
+
+        ShopViewModel GetShopByCode(string code, int shopname);
+
+        List<SelectionItem> GetShop(int agencyId);
     }
 }

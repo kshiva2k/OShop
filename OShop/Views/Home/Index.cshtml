@@ -4,84 +4,96 @@
 @model OShop.ViewModels.LoginViewModel
 @{
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
-        <title>Login</title>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>oShop | Log in</title>
+        <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/bootstrap/bootstrap.css">
-        <link rel="stylesheet" href="/fontawesome/font-awesome.min.css">
-        <link rel="stylesheet" href="/style/style.css">
 
-        <script src="/script/jquery-3.2.1.js"></script>
-        <script src="/bootstrap/bootstrap.js"></script>
-        <script src="/bootstrap/bootstrap.bundle.js"></script>
-
-
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="~/fontawesome-free/css/all.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="~/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
-    <body>
-        <section class="login-main">
-            <div class="row ml-0 mr-0">
-                <div class="login-form col-lg-4 col-md-5 col-sm-6 col-10 offset-lg-1 offset-md-1 offset-sm-2  offset-1">
-                    <div class="bg-white shadow-sm rounded p-6">
-                        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "js-validate", @novalidate="novalidate" }))
-                        {
-                            <div class="mb-4">
-                                <h2 class="h4 bold">Title Name here</h2>
-                            </div>
-                            <!-- Input -->
-                            <div class="js-form-message mb-3">
-                                <label>Enter User Name</label>
-                                <div class="js-focus-state input-group input-group form">
-                                    @*<input type="text" class="form-control form__input" name="username" required="" aria-label="Enter your username">*@
-                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control form__input", @type = "text" })
-                                </div>
-                            </div>
-                            <!-- End Input -->
-                            <!-- Input -->
-                            <div class="js-form-message mb-3">
-                                <label>Enter password</label>
-                                <div class="js-focus-state input-group input-group form">
-                                    @*<input type="password" class="form-control form__input" name="password" required="" aria-label="Enter your password">*@
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form__input", @type = "password" })
-                                </div>
-                            </div>
-                            <!-- End Input -->
-
-                            <button type="submit" class="btn btn-block btn-save bold" id="login" name="login">Login</button>
-                        }
-                    </div>
-                </div>
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="#"><b>ABC</b>Gas Agency</a>
             </div>
-        </section>
+            <!-- /.login-logo -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
+
+                    @*<form action="../../index3.html" method="post">*@
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        <div class="input-group mb-3">
+
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @type = "text", @placeholder = "UserName" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @type = "password", @placeholder = "Password" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        @*</form>*@
+                    }
+                    <p class="mb-1">
+                        <a href="#">I forgot my password</a>
+                    </p>
+
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+        </div>
+        <!-- /.login-box -->
+        <!-- jQuery -->
+        <script src="~/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+
+        <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/js/adminlte.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#login').click(function () {
+                    $('#formLogin').submit();
+                });
+            });
+        </script>
     </body>
 </html>
-
-<style>
-    .login-main {
-        height: 100vh;
-        background: linear-gradient(180deg, rgb(0, 204, 153) 0%, rgb(0, 204, 153) 0.01%, rgba(0, 204, 153, 0.3) 100%), url("images/loginBg.jpg");
-        background-size: 100% 100%;
-    }
-
-    .p-6 {
-        padding: 2.5rem !important;
-    }
-
-    .form-control {
-        height: calc(1.7em + 1.5rem + 2px) !important;
-        padding: 0.75rem 1rem !important;
-    }
-
-    .login-form {
-        margin-top: 6rem;
-    }
-</style>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#login').click(function () {
-            $('#formLogin').submit();
-        });
-    });
-</script>
 }
