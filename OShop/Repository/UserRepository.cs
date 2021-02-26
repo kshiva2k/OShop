@@ -9,7 +9,7 @@ namespace OShop.Repository
     {
         List<UserViewModel> GetUsers(int id);
         UserViewModel ValidateUser(string _loginname, string _password);
-
+        bool CheckDuplicateUser(string name, int Id);
 
         List<SelectionItem> GetRoles(int id);
 

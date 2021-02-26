@@ -10,6 +10,7 @@ namespace OShop.Repository
         bool AddAgency(AgencyViewModel viewModel);
         bool UpdateAgency(AgencyViewModel viewModel);
         bool DeleteAgency(int id);
+        bool CheckDuplicateAgency(string name, int Id);
         AgencyViewModel GetAgency(int id);
 
         bool AddDelivery(DeliveryViewModel viewModel);

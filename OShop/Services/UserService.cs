@@ -29,6 +29,25 @@ namespace OShop.Services
             return true;
 
         }
+        public bool CheckDuplicateUser(string name, int Id)
+        {
+            if (Id == 0)  // Add mode
+            {
+                var record = context.GUsermaster.Where(x => x.Loginname == name && x.Active.Value == 1).FirstOrDefault();
+                if (record != null || record.Id > 0)
+                    return false;
+                else
+                    return true;
+            }
+            else
+            {
+                var record = context.GUsermaster.Where(x => x.Loginname == name && x.Active.Value == 1 && x.Id != Id).FirstOrDefault();
+                if (record != null || record.Id > 0)
+                    return false;
+                else
+                    return true;
+            }
+        }
         public List<UserViewModel> GetUsers(int id)
         {
             List<UserViewModel> records = new List<UserViewModel>();

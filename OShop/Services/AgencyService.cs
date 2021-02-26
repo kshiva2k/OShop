@@ -59,6 +59,25 @@ namespace OShop.Services
             context.SaveChanges();
             return true;
         }
+        public bool CheckDuplicateAgency(string name, int Id)
+        {
+            if(Id == 0)  // Add mode
+            {
+                var record = context.GAgencymaster.Where(x => x.Name == name && x.Active.Value == 1).FirstOrDefault();
+                if (record != null || record.Id > 0)
+                    return false;
+                else
+                    return true;
+            }
+            else
+            {
+                var record = context.GAgencymaster.Where(x => x.Name == name && x.Active.Value == 1 && x.Id != Id).FirstOrDefault();
+                if (record != null || record.Id > 0)
+                    return false;
+                else
+                    return true;
+            }
+        }
         public AgencyViewModel GetAgency(int id)
         {
             var record = context.GAgencymaster.Where(x => x.Id == id).FirstOrDefault();
