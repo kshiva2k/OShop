@@ -15,7 +15,7 @@ namespace OShop.Controllers
         UserRepository userRepository;
         public AdminController(AgencyRepository _agencyRepository, ShopRepository _shopRepository, UserRepository _userRepository)
         {
-            agencyRepository = _agencyRepository;
+             agencyRepository = _agencyRepository;
             shopRepository = _shopRepository;
             userRepository = _userRepository;
         }
