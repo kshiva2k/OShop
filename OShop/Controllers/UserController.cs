@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OShop.Repository;
 using OShop.ViewModels;
@@ -14,6 +15,7 @@ namespace OShop.Controllers
             shopRepository = _shopRepository;
             agencyRepository = _agencyRepository;
         }
+        [Authorize]
         [Services.SessionCheck]
         public IActionResult Delivery()
         {
