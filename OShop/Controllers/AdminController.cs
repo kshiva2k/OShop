@@ -20,43 +20,43 @@ namespace OShop.Controllers
             shopRepository = _shopRepository;
             userRepository = _userRepository;
         }
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult ShopList()
         {
             return View();
         }
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult GetShops(int id)
         {
             List<ShopViewModel> list = new List<ShopViewModel>();
             list = shopRepository.GetShops(id);
             return PartialView("_ShopList", list);
         }
-        [Authorize]
+        [Services.SessionCheck]
         public JsonResult GetShopData()
         {
             List<ShopViewModel> list = new List<ShopViewModel>();
             list = shopRepository.GetShops(HttpContext.Session.GetInt32("AgencyId").GetValueOrDefault());
             return Json(list);
         }
-        [Authorize]
+        [Services.SessionCheck]
         public JsonResult GetAgencies()
         {
             var list = agencyRepository.GetAgencies();
             return Json(new { list = list, role = HttpContext.Session.GetInt32("RoleId"), agency = HttpContext.Session.GetInt32("Agencyid") });
 
         }
+        [Services.SessionCheck]
 
-        [Authorize]
         public IActionResult AddShop(int id)
         {
             ShopViewModel viewModel = new ShopViewModel();
-            viewModel = shopRepository.GetShopById(id);
+           // viewModel = shopRepository.GetShopById(id);
             ViewData["ShopCategory"] = shopRepository.GetShopCategories(id);
             return PartialView("_Shopmaster", viewModel);
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult GetUsers(int id)
         {
             List<UserViewModel> list = new List<UserViewModel>();
@@ -64,7 +64,7 @@ namespace OShop.Controllers
             return PartialView("_UserList", list);
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult AddUser()
         {
             int id = Convert.ToInt32(HttpContext.Session.GetInt32("RoleId"));
@@ -73,7 +73,7 @@ namespace OShop.Controllers
             return PartialView("_UserMaster", viewModel);
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         [HttpPost]
         public IActionResult ShopMaster(IFormCollection formCollection)
         {
@@ -91,7 +91,7 @@ namespace OShop.Controllers
             shopRepository.AddShop(viewModel);
             return RedirectToAction("ShopList", "Admin");
         }
-        [Authorize]
+        [Services.SessionCheck]
         [HttpPost]
         public IActionResult ShopCategoryList(IFormCollection formCollection)
         {
@@ -107,20 +107,20 @@ namespace OShop.Controllers
         }
 
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult ShopCategoryList()
         {
             return View();
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult GetCategorys(int id)
         {
             List<ShopCategoryViewModel> list = new List<ShopCategoryViewModel>();
             list = shopRepository.GetShopCategories(id);
             return PartialView("_CategoryList", list);
         }
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult AddCategory(int id)
         {
 
@@ -128,13 +128,13 @@ namespace OShop.Controllers
             return PartialView("_Categorymaster", viewModel);
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult UserMaster()
         {
             return View();
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         [HttpPost]
         public IActionResult UserMaster(IFormCollection formCollection)
         {
@@ -150,19 +150,19 @@ namespace OShop.Controllers
             userRepository.AddUser(viewModel);
             return RedirectToAction("UserMaster", "Admin");
         }
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult ActivityScreen()
         {
             return View();
         }
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult Activity()
         {
             ViewData["ShopMaster"] = shopRepository.GetShop(Convert.ToInt32(HttpContext.Session.GetInt32("Agencyid")));
             return View();
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult ActivityMaster(int id)
         {
             ViewData["ShopMaster"] = shopRepository.GetShop(id);
@@ -170,7 +170,7 @@ namespace OShop.Controllers
             return PartialView("_ActivityMaster", "");
         }
 
-        [Authorize]
+        [Services.SessionCheck]
         public IActionResult GetActivityList(string shopno, string shopcode)
         {
          
@@ -178,10 +178,26 @@ namespace OShop.Controllers
             var list = agencyRepository.GetActivities(Convert.ToInt32(HttpContext.Session.GetInt32("Agencyid")), shopcode, Convert.ToInt32(shopno));
             return PartialView("_ActivityList", list);
         }
-        [Authorize]
+        [Services.SessionCheck]
         public JsonResult ClearBill(long id)
         {
             bool result = agencyRepository.ClearBill(id);
+            return Json(result);
+        }
+
+
+        [Services.SessionCheck]
+        public JsonResult CheckDuplicateShop([FromBody]  Models.CheckQuplicate CheckQuplicate)
+        {
+            bool result = shopRepository.CheckDuplicateShop(CheckQuplicate.Name, CheckQuplicate.Code, CheckQuplicate.Agencyid);
+            return Json(result);
+        }
+
+        [Services.SessionCheck]
+        [HttpPost]
+        public JsonResult CheckDuplicateShopCategory([FromBody] Models.CheckQuplicate CheckQuplicate)
+        {
+            bool result = shopRepository.CheckDuplicateShopCategory(CheckQuplicate.Name, CheckQuplicate.Agencyid);
             return Json(result);
         }
     }

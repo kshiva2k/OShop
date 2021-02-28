@@ -15,7 +15,7 @@ namespace OShop.Controllers
             shopRepository = _shopRepository;
             agencyRepository = _agencyRepository;
         }
-        [Authorize]
+       
         [Services.SessionCheck]
         public IActionResult Delivery()
         {
