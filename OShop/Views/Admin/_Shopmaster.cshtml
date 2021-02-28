@@ -8,37 +8,36 @@
         <div class="col-md-6">
             <div class="form-group">
                 @*<div class="row">*@
-                    @*<div class="col-md-10">*@
-                        <label>Shop Category *</label>
-                        <select name="Shopcategoryid" class="form-control select2bs4" id="Shopcategoryid" style="width: 100%;" onchange="onchanges(this.id);">
-                            <option value="">Choose shop category ..</option>
-                            @foreach (var item in (List<OShop.ViewModels.ShopCategoryViewModel>)ViewData["ShopCategory"])
-                            {
-                                <option value="@item.Id">@item.Name</option>
-                            }
-                        </select>
-                        <span style="display:none" id="Shopcategoryid-error" class="error invalid-feedback">Please enter a shop category</span>
-                    @*</div>*@
-                    @*<div class="col-md-2">
+                @*<div class="col-md-10">*@
+                <label>Shop Category *</label>
+                <select name="Shopcategoryid" class="form-control select2bs4" id="Shopcategoryid" style="width: 100%;" onchange="onchanges(this.id);">
+                    <option value="">Choose shop category ..</option>
+                    @foreach (var item in (List<OShop.ViewModels.ShopCategoryViewModel>)ViewData["ShopCategory"])
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span style="display:none" id="Shopcategoryid-error" class="error invalid-feedback">Please enter a shop category</span>
+                @*</div>*@
+                @*<div class="col-md-2">
                         <a placeholder="Add new shop Category" href="#" class="btn btn-success"><i class="fas fa-plus"></i></a>
                     </div>*@
                 @*</div>*@
-                </div>
-                <!-- /.form-group -->
-                <div class="form-group">
-                    <label>Shop no *</label>
-                    @Html.TextBoxFor(m => m.Code, new { id = "shopcodeid", @name = "shopcode", @class = "form-control", @type = "text", @placeholder = "Shop no", @maxlength = "5", @onkeyup = "onkeyups(this.id);" })
-                    <span style="display:none" id="shopcodeid-error" class="error invalid-feedback">Please enter a shop no</span>
-                </div>
-                <!-- /.form-group -->
             </div>
             <!-- /.form-group -->
             <div class="form-group">
-                <label>Shop code</label>
-                @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @type = "text", @placeholder = "Shop code", @maxlength = "5" })
+                <label>Shop no *</label>
+                @Html.TextBoxFor(m => m.Code, new { id = "shopcodeid", @name = "shopcode", @class = "form-control", @type = "text", @placeholder = "Shop no", @maxlength = "5", @onkeyup = "onkeyups(this.id);" })
+                <span style="display:none" id="shopcodeid-error" class="error invalid-feedback">Please enter a shop no</span>
             </div>
             <!-- /.form-group -->
-        
+        </div>
+        <!-- /.form-group -->
+        @*<div class="form-group">
+                <label>Shop code</label>
+                @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @type = "text", @placeholder = "Shop code", @maxlength = "5" })
+            </div>*@
+        <!-- /.form-group -->
         <!-- /.col -->
         <div class="col-md-6">
             <div class="form-group">
@@ -74,8 +73,8 @@
                 <span style="display:none" id="amountid-error" class="error invalid-feedback">Please enter a amount</span>
             </div>
             <div class="form-group bottom-center">
-                
-                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+
+                <button type="button" class="btn btn-primary" id="save" onclick="return checkshopname();">Save</button>
                 <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
 
             </div>
@@ -85,23 +84,64 @@
     </div>
     <!-- /.row -->
     <script type="text/javascript">
-        
-        function SaveFunction() {
-            var condition = Validateshop();
 
+        //function SaveFunction() {
+
+        //    var check = checkshopname();
+        //    if (condition == true) {
+        //        $("#Agencyid").val($("#agencylist").val());
+        //        alert(check);
+        //        if (check == true)
+        //        {
+        //            return true;
+        //        }
+        //        else {
+
+        //            alert("Shop name and Shop Code already exists")
+        //            return false;
+        //        }
+
+
+        //    }
+        //    else {
+        //        return false;
+        //    }
+        //}
+
+        function checkshopname() {
+
+            var condition = Validateshop();
             if (condition == true) {
                 $("#Agencyid").val($("#agencylist").val());
-                // $('#formShop').submit();
-                //$('#fShop').trigger('submit');
-                return true;
+                var CheckQuplicate = { "Name": $("#shopnameid").val(), "Code": $("#shopcodeid").val(), "AgencyId": parseInt($("#agencylist").val()) };
+                console.log(CheckQuplicate)
 
+                $.ajax({
+                    type: 'POST',
+                    url: '../Admin/CheckDuplicateShop',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(CheckQuplicate),
+                    success: function (response) {
+                        if (response == true) {
+                            $('#fShop').trigger('submit');
+                        } else { alert("Shop name and Shop Code already exists");return false; }
+                    },
+                    failure: function (response) {
+                        return false;
+                    },
+                    error: function (response) {
+                        return false;
+                    }
+
+
+                });
             }
             else {
                 return false;
             }
-        }
 
-        
+        }
 
         function Validateshop() {
 

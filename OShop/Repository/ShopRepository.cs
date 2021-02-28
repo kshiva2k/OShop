@@ -11,14 +11,14 @@ namespace OShop.Repository
         bool AddShop(ShopViewModel viewModel);
         bool UpdateShop(ShopViewModel viewModel);
         bool DeleteteShop(ShopViewModel viewModel);
-        bool CheckDuplicateShop(string name, int Id, int AgencyId);
+        bool CheckDuplicateShop(string name, string Code, int AgencyId);
         ShopViewModel GetShopById(int id);
 
         List<ShopCategoryViewModel> GetShopCategories(int agencyId);
         bool AddShopCategory(ShopCategoryViewModel viewModel);
         bool UpdateShopCategory(ShopCategoryViewModel viewModel);
         bool DeleteteShopCategory(int Id);
-        bool CheckDuplicateShopCategory(string name, int Id);
+        bool CheckDuplicateShopCategory(string Name, int AgencyId);
         ShopCategoryViewModel GetShopCategoryById(int id);
 
 

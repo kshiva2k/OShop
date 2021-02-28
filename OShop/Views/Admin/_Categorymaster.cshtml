@@ -18,7 +18,7 @@
                 
                 @Html.HiddenFor(m => m.Id)
                 @Html.HiddenFor(m => m.Agencyid)
-                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+                <button type="button" class="btn btn-primary" id="save" onclick="return checkshopname();">Save</button>
                 <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
 
             </div>
@@ -32,20 +32,58 @@
 
     <script type="text/javascript">
 
-    function SaveFunction() {
-        var condition = Validateuser();
+    //function SaveFunction() {
+    //    var condition = Validateuser();
 
-        if (condition == true) {
-            $("#Agencyid").val($("#agencylist").val());
-            // $('#formShop').submit();
-            //$('#fShop').trigger('submit');
-            return true;
+    //    if (condition == true) {
+    //        $("#Agencyid").val($("#agencylist").val());
+    //        // $('#formShop').submit();
+    //        //$('#fShop').trigger('submit');
+    //        return true;
+
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
+
+
+        function checkshopname() {
+
+            var condition = Validateuser();
+            if (condition == true) {
+                $("#Agencyid").val($("#agencylist").val());
+                var CheckQuplicate = { "Name": $("#Categoryid").val(), "AgencyId": parseInt($("#agencylist").val()) };
+                console.log(CheckQuplicate)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '../Admin/CheckDuplicateShopCategory',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(CheckQuplicate),
+                    success: function (response) {
+                        if (response == true) {
+                            $('#fCategory').trigger('submit');
+                        } else { alert("Shop Category already exists");return false; }
+                    },
+                    failure: function (response) {
+                        return false;
+                    },
+                    error: function (response) {
+                        return false;
+                    }
+
+
+                });
+            }
+            else {
+                return false;
+            }
 
         }
-        else {
-            return false;
-        }
-    }
+
+
 
 
 

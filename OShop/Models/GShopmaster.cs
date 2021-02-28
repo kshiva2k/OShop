@@ -26,4 +26,11 @@ namespace OShop.Models
         public virtual GShopcategorymaster Shopcategory { get; set; }
         public virtual ICollection<GDelivery> GDelivery { get; set; }
     }
+
+    public class CheckQuplicate
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public int Agencyid { get; set; }
+    }
 }

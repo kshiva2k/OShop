@@ -20,15 +20,15 @@ namespace OShop.Models
         public virtual DbSet<GShopmaster> GShopmaster { get; set; }
         public virtual DbSet<GUsermaster> GUsermaster { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                //optionsBuilder.UseMySQL("server=127.0.0.1;port=3306;user=root;password=Mysql@2020;database=oshop");
-//                optionsBuilder.UseMySQL(configuration.GetConnectionString("DefaultConnection"));
-//            }
-//        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //        optionsBuilder.UseMySQL("server=127.0.0.1;port=3306;user=root;password=Mysql@2021;database=gohire_dev");
+        //        optionsBuilder.UseMySQL(configuration.GetConnectionString("DefaultConnection"));
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
