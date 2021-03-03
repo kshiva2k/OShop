@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="~/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <link href="~/toastr/toastr.css" rel="stylesheet" />
+        <script src="~/plugins/common.js"></script>
     </head>
     <body class="hold-transition login-page">
         <div class="login-box">
@@ -38,7 +40,7 @@
                     {
                         <div class="input-group mb-3">
 
-                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @type = "text", @placeholder = "UserName" })
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @type = "text", @placeholder = "UserName", @autocomplete = "off" })
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -81,9 +83,10 @@
         </div>
         <!-- /.login-box -->
         <!-- jQuery -->
+        <script> var errormsg = '@ViewBag.Error' </script>
         <script src="~/jquery/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
-
+        <script src="~/toastr/toastr.min.js"></script>
         <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="~/js/adminlte.min.js"></script>
@@ -92,6 +95,9 @@
                 $('#login').click(function () {
                     $('#formLogin').submit();
                 });
+                if (errormsg != '') {
+                    showerror('Login', errormsg);
+                }
             });
         </script>
     </body>
