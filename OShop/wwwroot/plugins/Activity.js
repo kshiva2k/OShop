@@ -37,9 +37,10 @@ function clearbill(id) {
         dataType: "json",
         data: { 'id': id },
         success: function (data) {
-          if(data == true) {
-            bindActivities();
-          }
+            if (data == true) {
+                showsuccess('Activity Tracker', 'Bill cleared');
+                bindActivities();
+            }
         }
     });
 }
@@ -91,7 +92,7 @@ function bindActivities() {
         $("#activitylist").load("../Admin/GetActivityList", { shopno: $('#shoplist').val(), shopcode: $('#shopcode').val() },
             function (response, status, xhr) {
                 if (status == "error") {
-                    alert("An error occurred while loading the results.");
+                    showerror("Activity", "Error occurred while loading");
                 }
             });
     }

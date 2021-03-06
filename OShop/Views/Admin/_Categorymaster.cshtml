@@ -65,7 +65,7 @@
                     success: function (response) {
                         if (response == true) {
                             $('#fCategory').trigger('submit');
-                        } else { alert("Shop Category already exists");return false; }
+                        } else { showerror('Shop category', 'Shop Category already exists');return false; }
                     },
                     failure: function (response) {
                         return false;

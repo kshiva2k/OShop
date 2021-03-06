@@ -125,7 +125,7 @@
                     success: function (response) {
                         if (response == true) {
                             $('#fShop').trigger('submit');
-                        } else { alert("Shop name and Shop Code already exists");return false; }
+                        } else { showerror('Shop master', 'Shop name or Shop code already exists'); return false; }
                     },
                     failure: function (response) {
                         return false;

@@ -105,7 +105,7 @@ namespace OShop.Services
             //}
             //else
             //{
-                var record = context.GShopmaster.Where(x => x.Name == Name && x.Agencyid.Value == AgencyId && x.Active.Value == 1 && x.Code == Code).FirstOrDefault();
+                var record = context.GShopmaster.Where(x => x.Agencyid.Value == AgencyId && x.Active.Value == 1 && (x.Name == Name || x.Code == Code)).FirstOrDefault();
                 if (record == null || record.Id < 0)
                     return true;
                 else

@@ -45,7 +45,7 @@ function SaveDelivery() {
             data: json,
             success: function (data) {
                 //console.log(data);
-                toastr.success('Delivery entry succeed.');
+                toastr.success('Delivery details saved');
                 //return true;
                 ClearData();
                 $('#shopdetails').hide();
@@ -53,7 +53,7 @@ function SaveDelivery() {
         });
     }
     else {
-        toastr.error('Error while enter delivery details.');
+        showerror('Delivery', 'Error while enter delivery details.');
         return false;
     }
 }
