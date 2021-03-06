@@ -67,8 +67,27 @@
 
         if (condition == true) {
             $("#Agencyid").val($("#agencylist").val());
-            // $('#formShop').submit();
-            //$('#fShop').trigger('submit');
+            var CheckQuplicate = { "Name": $("#Loginname").val(), "AgencyId": parseInt($("#agencylist").val()) };
+            $.ajax({
+                type: 'POST',
+                url: '../Admin/CheckDuplicateUser',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(CheckQuplicate),
+                success: function (response) {
+                    if (response == true) {
+                        // $('#formShop').submit();
+                        //$('#fShop').trigger('submit');
+                    } else { showerror('User Master', 'Login name already exists'); return false; }
+                },
+                failure: function (response) {
+                    return false;
+                },
+                error: function (response) {
+                    return false;
+                }
+            });
+            
             return true;
 
         }

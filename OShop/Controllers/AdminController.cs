@@ -200,5 +200,13 @@ namespace OShop.Controllers
             bool result = shopRepository.CheckDuplicateShopCategory(CheckQuplicate.Name, CheckQuplicate.Agencyid);
             return Json(result);
         }
+
+        [Services.SessionCheck]
+        [HttpPost]
+        public JsonResult CheckDuplicateUser([FromBody] Models.CheckQuplicate CheckQuplicate)
+        {
+            bool result = userRepository.CheckDuplicateUser(CheckQuplicate.Name, 0, CheckQuplicate.Agencyid);
+            return Json(result);
+        }
     }
 }

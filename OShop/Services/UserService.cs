@@ -29,11 +29,11 @@ namespace OShop.Services
             return true;
 
         }
-        public bool CheckDuplicateUser(string name, int Id)
+        public bool CheckDuplicateUser(string name, int Id, int AgencyId)
         {
             if (Id == 0)  // Add mode
             {
-                var record = context.GUsermaster.Where(x => x.Loginname == name && x.Active.Value == 1).FirstOrDefault();
+                var record = context.GUsermaster.Where(x => x.Loginname == name && x.Agencyid == AgencyId && x.Active.Value == 1).FirstOrDefault();
                 if (record != null || record.Id > 0)
                     return false;
                 else
