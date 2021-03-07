@@ -189,7 +189,7 @@ namespace OShop.Controllers
         [Services.SessionCheck]
         public JsonResult CheckDuplicateShop([FromBody]  Models.CheckQuplicate CheckQuplicate)
         {
-            bool result = shopRepository.CheckDuplicateShop(CheckQuplicate.Name, CheckQuplicate.Code, CheckQuplicate.Agencyid);
+            bool result = shopRepository.CheckDuplicateShop(CheckQuplicate.Code, 0, CheckQuplicate.Agencyid);
             return Json(result);
         }
 
@@ -197,7 +197,7 @@ namespace OShop.Controllers
         [HttpPost]
         public JsonResult CheckDuplicateShopCategory([FromBody] Models.CheckQuplicate CheckQuplicate)
         {
-            bool result = shopRepository.CheckDuplicateShopCategory(CheckQuplicate.Name, CheckQuplicate.Agencyid);
+            bool result = shopRepository.CheckDuplicateShopCategory(CheckQuplicate.Name, 0, CheckQuplicate.Agencyid);
             return Json(result);
         }
 

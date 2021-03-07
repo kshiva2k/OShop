@@ -35,17 +35,17 @@ namespace OShop.Services
             {
                 var record = context.GUsermaster.Where(x => x.Loginname == name && x.Agencyid == AgencyId && x.Active.Value == 1).FirstOrDefault();
                 if (record != null || record.Id > 0)
-                    return false;
+                    return false;  // Duplicate exists
                 else
-                    return true;
+                    return true;  // No Duplication
             }
             else
             {
                 var record = context.GUsermaster.Where(x => x.Loginname == name && x.Active.Value == 1 && x.Id != Id).FirstOrDefault();
                 if (record != null || record.Id > 0)
-                    return false;
+                    return false;  // Duplicate exists
                 else
-                    return true;
+                    return true;  // No Duplication
             }
         }
         public List<UserViewModel> GetUsers(int id)

@@ -93,24 +93,24 @@ namespace OShop.Services
             context.SaveChanges();
             return true;
         }
-        public bool CheckDuplicateShop(string Name, string Code, int AgencyId)
+        public bool CheckDuplicateShop(string Code, int Id, int AgencyId)
         {
-            //if (Id == 0)  // Add mode
-            //{
-            //    var record = context.GShopmaster.Where(x => x.Name == name && x.Agencyid.Value == AgencyId && x.Active.Value == 1).FirstOrDefault();
-            //    if (record == null || record.Id < 0)
-            //        return true;
-            //    else
-            //        return false;
-            //}
-            //else
-            //{
-                var record = context.GShopmaster.Where(x => x.Agencyid.Value == AgencyId && x.Active.Value == 1 && (x.Name == Name || x.Code == Code)).FirstOrDefault();
-                if (record == null || record.Id < 0)
-                    return true;
+            if (Id == 0)  // Add mode
+            {
+                var record = context.GShopmaster.Where(x => x.Code == Code && x.Agencyid.Value == AgencyId && x.Active.Value == 1).FirstOrDefault();
+                if (record == null || record.Id <= 0)
+                    return true;  // No Duplication
                 else
-                    return false;
-            //}
+                    return false;  // Duplicate exists
+            }
+            else
+            {
+                var record = context.GShopmaster.Where(x => x.Agencyid.Value == AgencyId && x.Active.Value == 1 && x.Code == Code).FirstOrDefault();
+                if (record == null || record.Id <= 0)
+                    return true;  // No Duplication
+                else
+                    return false;  // Duplicate exists
+            }
         }
         public ShopViewModel GetShopById(int id)
         {
@@ -175,24 +175,24 @@ namespace OShop.Services
             context.SaveChanges();
             return true;
         }
-        public bool CheckDuplicateShopCategory(string Name, int AgencyId)
+        public bool CheckDuplicateShopCategory(string Name, int Id, int AgencyId)
         {
-            //if (Id == 0)  // Add mode
-            //{
-            //    var record = context.GShopcategorymaster.Where(x => x.Name == name && x.Active.Value == 1 && x.Agencyid.Value == AgencyId).FirstOrDefault();
-            //    if (record != null || record.Id > 0)
-            //        return false;
-            //    else
-            //        return true;
-            //}
-            //else
-            //{
+            if (Id == 0)  // Add mode
+            {
                 var record = context.GShopcategorymaster.Where(x => x.Name == Name && x.Active.Value == 1 && x.Agencyid.Value == AgencyId).FirstOrDefault();
-                if (record == null || record.Id < 0)
-                    return true;
+                if (record != null || record.Id > 0)
+                    return false;  // Duplicate exists
                 else
-                    return false;
-            //}
+                    return true;  // No Duplication
+            }
+            else
+            {
+                var record = context.GShopcategorymaster.Where(x => x.Name == Name && x.Active.Value == 1 && x.Agencyid.Value == AgencyId).FirstOrDefault();
+                if (record == null || record.Id <= 0)
+                    return true;  // No Duplication
+                else
+                    return false;  // Duplicate exists
+            }
         }
         public ShopCategoryViewModel GetShopCategoryById(int id)
         {
