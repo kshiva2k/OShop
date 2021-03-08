@@ -54,4 +54,11 @@
 </div>
 
 <script src="~/plugins/CategoryList.js"></script>
+@if (ViewBag.JavaScriptFunction != "")
+{
+    <script type="text/javascript">
+        var errormsg = '@ViewBag.JavaScriptFunction'
+    showsuccess('Shop Category', errormsg);
 
+    </script>
+}

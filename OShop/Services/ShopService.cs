@@ -98,7 +98,7 @@ namespace OShop.Services
             if (Id == 0)  // Add mode
             {
                 var record = context.GShopmaster.Where(x => x.Code == Code && x.Agencyid.Value == AgencyId && x.Active.Value == 1).FirstOrDefault();
-                if (record == null || record.Id <= 0)
+                if (record == null )
                     return true;  // No Duplication
                 else
                     return false;  // Duplicate exists
@@ -106,7 +106,7 @@ namespace OShop.Services
             else
             {
                 var record = context.GShopmaster.Where(x => x.Agencyid.Value == AgencyId && x.Active.Value == 1 && x.Code == Code).FirstOrDefault();
-                if (record == null || record.Id <= 0)
+                if (record == null )
                     return true;  // No Duplication
                 else
                     return false;  // Duplicate exists
@@ -180,7 +180,7 @@ namespace OShop.Services
             if (Id == 0)  // Add mode
             {
                 var record = context.GShopcategorymaster.Where(x => x.Name == Name && x.Active.Value == 1 && x.Agencyid.Value == AgencyId).FirstOrDefault();
-                if (record != null || record.Id > 0)
+                if (record != null )
                     return false;  // Duplicate exists
                 else
                     return true;  // No Duplication
@@ -188,7 +188,7 @@ namespace OShop.Services
             else
             {
                 var record = context.GShopcategorymaster.Where(x => x.Name == Name && x.Active.Value == 1 && x.Agencyid.Value == AgencyId).FirstOrDefault();
-                if (record == null || record.Id <= 0)
+                if (record == null )
                     return true;  // No Duplication
                 else
                     return false;  // Duplicate exists

@@ -34,7 +34,7 @@
     });
 }
 function showsuccess(title, message) {
-    toastr.error(message, title, {
+    toastr.success(message, title, {
         tapToDismiss: true,
         toastClass: 'toast',
         containerId: 'toast-container',

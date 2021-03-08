@@ -11,7 +11,7 @@
             <!-- /.form-group -->
             <div class="form-group">
                 <label>Category Name *</label>
-                @Html.TextBoxFor(m => m.Name, new { id = "Categoryid", @name = "Categoryid", @class = "form-control", @type = "text", @placeholder = "Category Name", @onkeyup = "onkeyups(this.id);" })
+                @Html.TextBoxFor(m => m.Name, new { id = "Categoryid", @name = "Categoryid", @class = "form-control", @type = "text", @autocomplete="off", @placeholder = "Category Name", @onkeyup = "onkeyups(this.id);" })
             <span style="display:none" id="Categoryid-error" class="error invalid-feedback">Please enter Category name</span>
             </div>
             <div class="form-group bottom-center">

@@ -27,7 +27,7 @@
             <!-- /.form-group -->
             <div class="form-group">
                 <label>Shop no *</label>
-                @Html.TextBoxFor(m => m.Code, new { id = "shopcodeid", @name = "shopcode", @class = "form-control", @type = "text", @placeholder = "Shop no", @maxlength = "5", @onkeyup = "onkeyups(this.id);" })
+                @Html.TextBoxFor(m => m.Code, new { id = "shopcodeid", @name = "shopcode", @class = "form-control", @type = "text", @placeholder = "Shop no", @autocomplete="off", @maxlength = "5", @onkeyup = "onkeyups(this.id);" })
                 <span style="display:none" id="shopcodeid-error" class="error invalid-feedback">Please enter a shop no</span>
             </div>
             <!-- /.form-group -->
@@ -44,12 +44,12 @@
                 <label>Shop Name *</label>
                 @Html.HiddenFor(m => m.Id)
                 @Html.HiddenFor(m => m.Agencyid)
-                @Html.TextBoxFor(m => m.Name, new { id = "shopnameid", @name = "shopname", @class = "form-control", @type = "text", @placeholder = "Shop name", @maxlength = "100", @onkeyup = "onkeyups(this.id);" })
+                @Html.TextBoxFor(m => m.Name, new { id = "shopnameid", @name = "shopname", @class = "form-control", @type = "text", @placeholder = "Shop name", @autocomplete = "off", @maxlength = "100", @onkeyup = "onkeyups(this.id);" })
                 <span style="display:none" id="shopnameid-error" class="error invalid-feedback">Please enter a shop name</span>
             </div>
             <div class="form-group">
                 <label>Shop Address</label>
-                @Html.TextAreaFor(m => m.Address, new { id = "shopaddr", @class = "form-control", @type = "text", @placeholder = "Shop Address", @maxlength = "200" })
+                @Html.TextAreaFor(m => m.Address, new { id = "shopaddr", @class = "form-control", @type = "text", @placeholder = "Shop Address", @autocomplete = "off", @maxlength = "200" })
             </div>
             <!-- /.form-group -->
         </div>
@@ -57,11 +57,11 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Mobile</label>
-                @Html.TextBoxFor(m => m.Phone, new { id = "shopno", @class = "form-control", @type = "number", @placeholder = "Mobile", @maxlength = "10" })
+                @Html.TextBoxFor(m => m.Phone, new { id = "shopno", @class = "form-control", @type = "number", @placeholder = "Mobile", @autocomplete = "off", @maxlength = "10" })
             </div>
             <div class="form-group">
                 <label>Email</label>
-                @Html.TextBoxFor(m => m.Email, new { id = "shopemail", @class = "form-control", @type = "email", @placeholder = "Email", @maxlength = "20" })
+                @Html.TextBoxFor(m => m.Email, new { id = "shopemail", @class = "form-control", @type = "email", @placeholder = "Email", @autocomplete = "off", @maxlength = "20" })
             </div>
             <!-- /.form-group -->
         </div>

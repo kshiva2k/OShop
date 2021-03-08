@@ -3,7 +3,16 @@
     ViewData["Title"] = "UserMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*<script type="text/javascript">
+     var errormsg = @ViewBag.Error;
+        $(document).ready(function () {
 
+            if (errormsg != '') {
+                alert(errormsg)
+                //showerror('UserMaster', errormsg);
+            }
+        });
+    </script>*@
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -54,3 +63,11 @@
 </div>
 
 <script src="~/plugins/UserList.js"></script>
+@if (ViewBag.JavaScriptFunction != "")
+{
+    <script type="text/javascript">
+        var errormsg = '@ViewBag.JavaScriptFunction'
+    showsuccess('User Master', errormsg);
+
+    </script>
+}

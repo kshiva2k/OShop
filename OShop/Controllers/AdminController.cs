@@ -23,6 +23,15 @@ namespace OShop.Controllers
         [Services.SessionCheck]
         public IActionResult ShopList()
         {
+            if (!string.IsNullOrEmpty(Convert.ToString(TempData["SavedAlert"])))
+            {
+
+                ViewBag.JavaScriptFunction = "New Shop Added Successfully!";
+            }
+            else
+            {
+                ViewBag.JavaScriptFunction = "";
+            }
             return View();
         }
         [Services.SessionCheck]
@@ -89,6 +98,7 @@ namespace OShop.Controllers
                 Shopcategoryid = Convert.ToInt32(formCollection["Shopcategoryid"])
             };
             shopRepository.AddShop(viewModel);
+            TempData["SavedAlert"] = "true";
             return RedirectToAction("ShopList", "Admin");
         }
         [Services.SessionCheck]
@@ -103,6 +113,7 @@ namespace OShop.Controllers
 
             };
             shopRepository.AddShopCategory(viewModel);
+            TempData["SavedAlert"] = "true";
             return RedirectToAction("ShopCategoryList", "Admin");
         }
 
@@ -110,6 +121,15 @@ namespace OShop.Controllers
         [Services.SessionCheck]
         public IActionResult ShopCategoryList()
         {
+            if (!string.IsNullOrEmpty(Convert.ToString(TempData["SavedAlert"])))
+            {
+
+                ViewBag.JavaScriptFunction = "New Category Added Successfully!";
+            }
+            else
+            {
+                ViewBag.JavaScriptFunction = "";
+            }
             return View();
         }
 
@@ -131,6 +151,13 @@ namespace OShop.Controllers
         [Services.SessionCheck]
         public IActionResult UserMaster()
         {
+            if (!string.IsNullOrEmpty(Convert.ToString(TempData["SavedAlert"]))){
+
+                ViewBag.JavaScriptFunction = "User Saved Successfully!";
+            }
+            else {
+                ViewBag.JavaScriptFunction = "";
+            }
             return View();
         }
 
@@ -148,6 +175,7 @@ namespace OShop.Controllers
 
             };
             userRepository.AddUser(viewModel);
+            TempData["SavedAlert"] = "true";
             return RedirectToAction("UserMaster", "Admin");
         }
         [Services.SessionCheck]

@@ -50,7 +50,7 @@
         <div class="col-md-6">
            
             <div class="form-group bottom-center">
-                <button type="submit" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
+                <button type="button" class="btn btn-primary" id="save" onclick="return SaveFunction();">Save</button>
                 <button type="button" class="btn btn-danger" onclick="clear();">Clear</button>
 
             </div>
@@ -59,15 +59,16 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-<script> var errormsg = '@ViewBag.Error' </script>
+
 <script type="text/javascript">
+
 
     function SaveFunction() {
         var condition = Validateuser();
 
         if (condition == true) {
             $("#Agencyid").val($("#agencylist").val());
-            var CheckQuplicate = { "Name": $("#Loginname").val(), "AgencyId": parseInt($("#agencylist").val()) };
+            var CheckQuplicate = { "Name": $("#loginnameid").val(), "AgencyId": parseInt($("#agencylist").val()) };
             $.ajax({
                 type: 'POST',
                 url: '../Admin/CheckDuplicateUser',
@@ -76,8 +77,8 @@
                 data: JSON.stringify(CheckQuplicate),
                 success: function (response) {
                     if (response == true) {
-                        // $('#formShop').submit();
-                        //$('#fShop').trigger('submit');
+
+                        $('#fUser').trigger('submit');
                     } else { showerror('User Master', 'Login name already exists'); return false; }
                 },
                 failure: function (response) {
@@ -87,7 +88,7 @@
                     return false;
                 }
             });
-            
+
             return true;
 
         }
@@ -127,9 +128,7 @@
 
         return true;
     }
-
-
-
+   
 </script>
 
 

@@ -41,15 +41,24 @@
             </div>
         </div>
         <div class="card-body" id="shopmaster">
-            
-        </div>        
+
+        </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <div  id="shoplist">
-                
+            <div id="shoplist">
+
             </div>
         </div>
     </div>
 </div>
 <script src="~/plugins/shoplist.js"></script>
+
+@if (ViewBag.JavaScriptFunction != "")
+{
+    <script type="text/javascript">
+        var errormsg = '@ViewBag.JavaScriptFunction'
+    showsuccess('Shop Master', errormsg);
+
+    </script>
+}

@@ -12,6 +12,8 @@ namespace OShop.ViewModels
         public int Agencyid { get; set; }
 
         public string RoleName { get; set; }
+
+        public string JavascriptFunction { get; set; }
     }
 
     public class SelectionItem

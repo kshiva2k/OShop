@@ -186,102 +186,106 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview">
-                                <a href="@Url.Action("Dashboard","Home")" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Dashboard
+    with font-awesome or any other icon font library -->
 
-                                    </p>
-                                </a>
-
-                            </li>
-                            @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 3)
+                            @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") != 3)
                             {
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Delivery","User")" class="nav-link">
-                                        <i class="nav-icon fas fa-tasks"></i>
+                                <li class="nav-item has-treeview">
+                                    <a href="@Url.Action("Dashboard", "Home")" class="nav-link">
+                                        <i class="nav-icon fas fa-tachometer-alt"></i>
                                         <p>
-                                            Delivery
-                                            @*<span class="right badge badge-danger">New</span*@
+                                            Dashboard
+
                                         </p>
                                     </a>
+
                                 </li>
                             }
-                            @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1
-                       || HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 2)
-                            {
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Activity","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-th"></i>
-                                        <p>
-                                            Agency Tracker
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
+                                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 3)
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Delivery","User")" class="nav-link">
+                                            <i class="nav-icon fas fa-tasks"></i>
+                                            <p>
+                                                Delivery
+                                                @*<span class="right badge badge-danger">New</span*@
+                                            </p>
+                                        </a>
+                                    </li>
+                                }
+                                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1
+                          || HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 2)
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Activity","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>
+                                                Agency Tracker
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("ShopList","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-shopping-basket"></i>
-                                        <p>
-                                            Shop Master
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ShopList","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-shopping-basket"></i>
+                                            <p>
+                                                Shop Master
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("ShopCategoryList","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-cart-arrow-down"></i>
-                                        <p>
-                                            Shop Category Master
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("UserMaster","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-user"></i>
-                                        <p>
-                                            User Master
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
-                                @*<li class="nav-item">
-                                    <a href="@Url.Action("Activity","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-money-check"></i>
-                                        <p>
-                                            Activity List
-                                        </p>
-                                    </a>
-                                </li>*@
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ShopCategoryList","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-cart-arrow-down"></i>
+                                            <p>
+                                                Shop Category Master
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("UserMaster","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-user"></i>
+                                            <p>
+                                                User Master
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
+                                    @*<li class="nav-item">
+                    <a href="@Url.Action("Activity","Admin")" class="nav-link">
+                        <i class="nav-icon fas fa-money-check"></i>
+                        <p>
+                            Activity List
+                        </p>
+                    </a>
+                </li>*@
 
-                            }
-                            @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
-                            {
-                                <li class="nav-item">
-                                    <a href="@Url.Action("ShopList","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-shopping-basket"></i>
-                                        <p>
-                                            Agency Master
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("ShopList","Admin")" class="nav-link">
-                                        <i class="nav-icon fas fa-money-bill"></i>
-                                        <p>
-                                            Agency subscriptions
-                                            @*<span class="right badge badge-danger">New</span>*@
-                                        </p>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
+                                }
+                                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ShopList","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-shopping-basket"></i>
+                                            <p>
+                                                Agency Master
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ShopList","Admin")" class="nav-link">
+                                            <i class="nav-icon fas fa-money-bill"></i>
+                                            <p>
+                                                Agency subscriptions
+                                                @*<span class="right badge badge-danger">New</span>*@
+                                            </p>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
