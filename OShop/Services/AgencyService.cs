@@ -129,9 +129,9 @@ namespace OShop.Services
             //        && u.Createddate > fromDate && u.Createddate <= toDate).OrderByDescending(o => o.Id).ToList();
             var list = (from a in context.GDelivery
                         join c in context.GShopmaster on a.Shopid equals c.Id
-                        where a.Shopid == shopno || c.Code == shopCode
+                        where (a.Shopid == shopno || c.Code == shopCode) && a.Active == 1
                         orderby a.Id descending
-                        select new { a.Id, a.Agencyid, a.Shopid, c.Name, a.Invoiceamount, a.Paymentmode, a.Paymentno, a.Actualpayment, a.Billcleared, a.Createddate, a.Quantity });
+                        select new { a.Id, a.Agencyid, a.Shopid, c.Name, a.Invoiceamount, a.Paymentmode, a.Paymentno, a.Actualpayment, a.Billcleared, a.Createddate, a.Quantity, a.Returnquantity });
             foreach (var item in list)
             {
                 records.Add(new DeliveryViewModel()
@@ -146,7 +146,8 @@ namespace OShop.Services
                     Actualpayment = item.Actualpayment,
                     Billcleared = item.Billcleared.GetValueOrDefault(),
                     InvoiceDate = item.Createddate.GetValueOrDefault().ToShortDateString(),
-                    Quantity = item.Quantity.GetValueOrDefault()
+                    Quantity = item.Quantity.GetValueOrDefault(),
+                    ReturnQuantity = item.Returnquantity.GetValueOrDefault()
                 });
             }
             return records;

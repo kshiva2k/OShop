@@ -15,7 +15,9 @@
                         <th>Shop name</th>
                         <th>Invoice date</th>
                         <th>Quantity</th>
+                        <th>Return Quantity</th>
                         <th>Invoice amount</th>
+                        <th>Paid amount</th>
                         <th>Payment mode</th>
                         <th>DD/Cheque no.</th>
                         <th>Clear bill</th>
@@ -28,7 +30,9 @@
                         <td>@shop.ShopName</td>
                         <td>@shop.InvoiceDate</td>
                         <td>@shop.Quantity</td>
+                        <td>@shop.ReturnQuantity</td>
                         <td>@shop.Invoiceamount</td>
+                        <td>@shop.Actualpayment</td>
                         <td>@shop.Paymentmode</td>
                         <td>@shop.Paymentno</td>
                         @if (shop.Billcleared == 0)
